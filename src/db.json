@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": "2",
+      "name": "Shampoo",
+      "price": 7.99,
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "1",
+      "name": "Shaving Cream",
+      "price": 5.99,
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "3",
+      "name": "Toothpaste",
+      "price": 3.49,
+      "image": "https://via.placeholder.com/150"
+    }
+  ]
+}
