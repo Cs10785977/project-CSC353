@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card';
+import { Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
-import SearchBar from './SearchBar';
-import ShoppingCart from './ShoppingCart';
+import Home from './pages/Home';
+import ProductDetails from './pages/ProductDetails';
+import CartPage from './pages/CartPage';
+import SideCart from './SideCart';
 
 function App() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  const [isSideCartOpen, setIsSideCartOpen] = useState(false);
 
   const API_URL = 'http://localhost:5001/products';
 
@@ -17,81 +23,116 @@ function App() {
       .then((data) => setProducts(data))
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
-    
 
-const filteredProducts = Array.isArray(products)
-  ? products.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  : [];
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
-const addToCart = (product) => {
-  const existingItem = cart.find((item) => item.id === product.id);
+  const filteredProducts = Array.isArray(products)
+    ? products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
-  if (existingItem) {
+  const addToCart = (product) => {
+    const existingItem = cart.find((item) => item.id === product.id);
+
+    if (existingItem) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, quantity: 1 }]);
+    }
+
+    setIsSideCartOpen(true);
+  };
+
+  const increaseQuantity = (id) => {
     setCart(
       cart.map((item) =>
-        item.id === product.id
+        item.id === id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
-  } else {
-    setCart([...cart, { ...product, quantity: 1 }]);
-  }
-};
+  };
 
-const increaseQuantity = (id) => {
-  setCart(
-    cart.map((item) =>
-      item.id === id
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    )
-  );
-};
+  const decreaseQuantity = (id) => {
+    setCart(
+      cart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
 
-const decreaseQuantity = (id) => {
-  setCart(
-    cart.map((item) =>
-      item.id === id
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    ).filter((item) => item.quantity > 0)
-  );
-};
+  const removeFromCart = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
 
-const removeFromCart = (id) => {
-  setCart(cart.filter((item) => item.id !== id));
-};
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  return (
+    <div className="app-background">
+      <NavBar 
+        cartCount={totalItems} 
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        products={products}
+      />
 
-    return (
-    <div className="container mt-3">
-       <NavBar cartCount={cart.length} />
-      <h1>Welcome to OnlineShopping.com</h1>
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              products={filteredProducts}
+              cart={cart}
+              addToCart={addToCart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
 
-      
-
-      <div className="row">
-        {filteredProducts.map((product) => (
-          <div className="col-md-4" key={product.id}>
-            <Card
-              product={product}
+        <Route
+          path="/product/:id"
+          element={
+            <ProductDetails
+              products={products}
               addToCart={addToCart}
             />
-          </div>
-        ))}
-      </div>
+          }
+        />
 
-      <ShoppingCart
-        cart={cart}
-        increaseQuantity={increaseQuantity}
-        decreaseQuantity={decreaseQuantity}
-        removeFromCart={removeFromCart}
-      />
-      
+        <Route
+          path="/cart"
+          element={
+            <CartPage
+              cart={cart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+
+      </Routes>
+
+      <SideCart
+          cart={cart}
+          isOpen={isSideCartOpen}
+          closeSideCart={() => setIsSideCartOpen(false)}
+        />
     </div>
   );
 }

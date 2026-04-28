@@ -1,49 +1,89 @@
 import React from 'react';
 
 function ShoppingCart({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) {
-const total = cart.reduce(
-  (sum, item) => sum + item.quantity * (item.price || 9.99),
-  0
-);
+  const total = cart.reduce(
+    (sum, item) => sum + item.quantity * item.price,
+    0
+  );
+
   return (
-    <div className="card p-3 mt-4">
-      <h3>Shopping Cart</h3>
+    <div className="row mt-4">
+      <div className="col-md-8">
+        <div className="card p-3">
+          <h3>Shopping Cart</h3>
 
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        cart.map((item) => (
-            
-          <div key={item.id} className="mb-3 border-bottom pb-2">
-            <strong>{item.name}</strong>
-            <p>Quantity: {item.quantity}</p>
+          {cart.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            cart.map((item) => (
+              <div key={item.id} className="d-flex border-bottom py-3">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  style={{ width: '100px', height: '100px', objectFit: 'contain' }}
+                  className="me-3"
+                />
 
-            <button
-              className="btn btn-success btn-sm me-2"
-              onClick={() => increaseQuantity(item.id)}
-            >
-              +
-            </button>
+                <div className="flex-grow-1">
+                  <h5>{item.name}</h5>
+                  <p className="fw-bold">${item.price}</p>
 
-            <button
-              className="btn btn-warning btn-sm me-2"
-              onClick={() => decreaseQuantity(item.id)}
-            >
-              -
-            </button>
+                  <div className="d-flex align-items-center">
+                    <button
+                      className="btn btn-outline-danger btn-sm me-2"
+                      onClick={() =>
+                        item.quantity === 1
+                        ? removeFromCart(item.id)
+                        : decreaseQuantity(item.id)
+                      }
+                    >
+                      {item.quantity === 1 ? '🗑️' : '-'}
+                    </button>
 
-            <button
-              className="btn btn-danger btn-sm"
-              onClick={() => removeFromCart(item.id)}
-            >
-              Remove
+                    <span className="me-2">Qty: {item.quantity}</span>
+
+                    <button
+                      className="btn btn-outline-success btn-sm me-3"
+                      onClick={() => increaseQuantity(item.id)}
+                    >
+                    +
+                    </button>
+
+                    <span className="me-2">Qty: {item.quantity}</span>
+
+                    <button
+                      className="btn btn-outline-secondary btn-sm me-3"
+                      onClick={() => increaseQuantity(item.id)}
+                    >
+                      +
+                    </button>
+
+                    <button
+                      className="btn btn-link text-danger p-0"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+
+      {cart.length > 0 && (
+        <div className="col-md-4">
+          <div className="card p-3">
+            <h5>Subtotal ({cart.length} items):</h5>
+            <h4>${total.toFixed(2)}</h4>
+
+            <button className="btn btn-warning w-100 mt-3">
+              Proceed to checkout
             </button>
           </div>
-        ))
+        </div>
       )}
-        {cart.length > 0 && (
-            <h5 className="mt-3">Total: ${total.toFixed(2)}</h5>
-        )}
     </div>
   );
 }
