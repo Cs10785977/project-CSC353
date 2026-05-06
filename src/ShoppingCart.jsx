@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Displays all items in the cart page, allows user to control quanity, calculates total
 function ShoppingCart({ cart, increaseQuantity, decreaseQuantity, removeFromCart }) {
   const total = cart.reduce(
     (sum, item) => sum + item.quantity * item.price,
@@ -49,14 +50,7 @@ function ShoppingCart({ cart, increaseQuantity, decreaseQuantity, removeFromCart
                     +
                     </button>
 
-                    <span className="me-2">Qty: {item.quantity}</span>
-
-                    <button
-                      className="btn btn-outline-secondary btn-sm me-3"
-                      onClick={() => increaseQuantity(item.id)}
-                    >
-                      +
-                    </button>
+                    
 
                     <button
                       className="btn btn-link text-danger p-0"

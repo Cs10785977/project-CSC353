@@ -4,7 +4,7 @@ import Card from '../Card';
 function Home({ products, cart, addToCart, increaseQuantity, decreaseQuantity, removeFromCart }) {
   return (
     <div className="container mt-3">
-      <h1>Welcome to OnlineShopping.com</h1>
+      <h1>Welcome to Amazoooon.com</h1>
 
       <div className="row">
         {products.map((product) => (

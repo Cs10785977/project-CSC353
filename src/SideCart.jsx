@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+//Sidecart appeard when a user adds an item to cart.
+//Shows a preview of the item and the total
 function SideCart({ cart, isOpen, closeSideCart }) {
   const subtotal = cart.reduce(
     (sum, item) => sum + item.quantity * item.price,

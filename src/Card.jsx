@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//Displays a product cart
 function Card({ product, cart, addToCart, increaseQuantity, decreaseQuantity, removeFromCart }) {
+
+  //check if product already exist in the cart
   const cartItem = cart.find((item) => item.id === product.id);
 
   return (
@@ -12,6 +15,7 @@ function Card({ product, cart, addToCart, increaseQuantity, decreaseQuantity, re
             src={product.image}
             alt={product.name}
             className="img-fluid mb-3"
+            style={{ height: '200px', objectFit: 'contain' }}
           />
         </Link>
 
@@ -25,12 +29,19 @@ function Card({ product, cart, addToCart, increaseQuantity, decreaseQuantity, re
         <p className="text-muted">${product.price}</p>
 
         {!cartItem ? (
-          <button
-            className="btn btn-warning btn-sm mt-2 w-100"
-            onClick={() => addToCart(product)}
-          >
-            Add to Cart
-          </button>
+          product.stock === "Out of Stock" ? (
+            <button className="btn btn-secondary btn-sm mt-2 w-100" disabled>
+              Out of Stock
+            </button>
+          ) : (
+            <button
+              className="btn btn-warning btn-sm mt-2 w-100"
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+          )
+        
         ) : (
           <div className="d-flex align-items-center mt-2">
             <button

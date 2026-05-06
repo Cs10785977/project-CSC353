@@ -7,33 +7,69 @@ function ProductDetails({ products, addToCart }) {
   const product = products.find((p) => p.id.toString() === id);
 
   if (!products || products.length === 0) {
-     return <h2 className="container mt-3">Loading product...</h2>;
+    return <h2 className="container mt-3">Loading product...</h2>;
   }
 
   if (!product) {
-     return <h2 className="container mt-3">Product not found</h2>;
+    return <h2 className="container mt-3">Product not found</h2>;
   }
 
+
+
   return (
-    <div className="container mt-3">
-      <h2>{product.name}</h2>
+    <div className="container mt-5">
+      <div className="row align-items-center">
 
-      <img
-        src={product.image}
-        alt={product.name}
-        className="img-fluid mb-3"
-      />
+        <div className="col-md-6 text-center">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="img-fluid rounded"
+            style={{ maxHeight: '400px', objectFit: 'contain' }}
+          />
+        </div>
 
-      <h4>${product.price}</h4>
+        <div className="col-md-6">
+          <h2>{product.name}</h2>
 
-      <p>This is a detailed description of the product.</p>
+          <h3 className="text-success mb-3">
+            ${product.price}
+          </h3>
 
-      <button
-        className="btn btn-primary mt-2"
-        onClick={() => addToCart(product)}
-      >
-        Add to Cart
-      </button>
+          <p>{product.description}</p>
+
+          <p
+            className={
+              product.stock === "Out of Stock"
+                ? "text-danger fw-bold"
+                : product.stock === "Limited Stock"
+                  ? "fw-bold"
+                  : "text-success fw-bold"
+            }
+            style={
+              product.stock === "Limited Stock"
+                ? { color: "#ff8800" }
+                : {}
+            }
+          >
+            {product.stock}
+          </p>
+
+          {product.stock === "Out of Stock" ? (
+            <button className="btn btn-secondary btn-lg mt-3" disabled>
+              Out of Stock
+            </button>
+          ) : (
+            <button
+              className="btn btn-warning btn-lg mt-3"
+              onClick={() => addToCart(product)}
+            >
+              Add to Cart
+            </button>
+          )}
+        </div>
+
+      </div>
     </div>
   );
 }

@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
+// Navigation bar that includes links to other pages and the search bar. 
 function NavBar({ cartCount, searchTerm, setSearchTerm, products }) {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <div className="container d-flex justify-content-between">
 
         <Link to="/" className="navbar-brand mb-0 h1">
-          Online Store
+          Welcome to Amazoooon
         </Link>
 
         <div className="d-flex align-items-center w-100">

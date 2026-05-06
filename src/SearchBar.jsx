@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+//Handles the search functionality and user input, displays suggested products when typing 
 function SearchBar({ searchTerm, setSearchTerm, products }) {
+
+  //Temp input value before search is submitted
   const [inputValue, setInputValue] = useState(searchTerm);
 
+  //Filters Search
   const suggestions = inputValue
     ? products.filter((product) =>
-        product.name.toLowerCase().includes(inputValue.toLowerCase())
-      )
+      product.name.toLowerCase().includes(inputValue.toLowerCase())
+    )
     : [];
 
+  const navigate = useNavigate();
+
   const handleSearch = () => {
-    setSearchTerm(inputValue);
+    const foundProduct = products.find((product) =>
+      product.name.toLowerCase() === inputValue.toLowerCase()
+    );
+
+    if (foundProduct) {
+      setInputValue('');
+      setSearchTerm('');
+      navigate(`/product/${foundProduct.id}`);
+    }
   };
 
   return (
@@ -47,8 +62,9 @@ function SearchBar({ searchTerm, setSearchTerm, products }) {
               className="p-2 suggestion-item"
               style={{ cursor: 'pointer' }}
               onClick={() => {
-                setInputValue(product.name);
-                setSearchTerm(product.name);
+                setInputValue('');
+                setSearchTerm('');
+                navigate(`/product/${product.id}`);
               }}
             >
               {product.name}

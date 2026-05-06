@@ -1,22 +1,148 @@
 {
   "products": [
     {
-      "id": "2",
-      "name": "Shampoo",
-      "price": 7.99,
-      "image": "https://picsum.photos/200"
-    },
-    {
       "id": "1",
       "name": "Shaving Cream",
-      "price": 5.99,
-      "image": "https://via.placeholder.com/150"
+      "price": 4.99,
+      "image": "https://getbevel.com/cdn/shop/files/BevelShavingCream_Render_01.png?v=1774907728",
+      "stock": "Limited Stock",
+      "description": "Shaving cream designed for a smooth and comfortable shave."
+    },
+    {
+      "id": "2",
+      "name": "Shampoo",
+      "price": 9.99,
+      "image": "https://www.pngitem.com/pimgs/m/530-5303018_background-shampoo-transparent-dove-hd-png-download.png",
+      "stock": "Limited Stock",
+      "description": "Shampoo that keeps hair fresh, clean, and healthy."
     },
     {
       "id": "3",
       "name": "Toothpaste",
-      "price": 3.49,
-      "image": "https://via.placeholder.com/150"
+      "price": 4.49,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLJTHpGmDaaCvuXyHhv6cQEejRfF8Afhk3wQ&s",
+      "stock": "In Stock",
+      "description": "Mint flavored toothpaste for a bright and healthy smile."
+    },
+    {
+      "id": "4",
+      "name": "Xbox One",
+      "price": 599.99,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmjTw_1gPsL27H_K2LMxmcz_srUV3q3DsMBA&s",
+      "stock": "In Stock",
+      "description": "Popular gaming console used to play video games."
+    },
+    {
+      "id": "5",
+      "name": "PS5",
+      "price": 699.99,
+      "image": "https://m.media-amazon.com/images/I/51ljnEaW0pL._AC_SL1500_.jpg",
+      "stock": "In Stock",
+      "description": "Next generation PlayStation console used to play video games ."
+    },
+    {
+      "id": "6",
+      "name": "Football",
+      "price": 25.99,
+      "image": "https://t4.ftcdn.net/jpg/05/39/90/47/360_F_539904789_5CQ5G7eFOLVe6qVw4izbri5H6J7zs0dW.jpg",
+      "stock": "In Stock",
+      "description": "Official size football perfect for practice and games."
+    },
+    {
+      "id": "7",
+      "name": "Basketball",
+      "price": 19.99,
+      "image": "https://media.istockphoto.com/id/462875267/photo/basketball.jpg?s=612x612&w=0&k=20&c=m_uy_NUWtz0mNRjPq6ePr2Rb9MAH13dwc4B49-4wgrY=",
+      "stock": "In Stock",
+      "description": "Durable indoor and outdoor basketball."
+    },
+    {
+      "id": "8",
+      "name": "Baseball Glove",
+      "price": 50.99,
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnPorcPxP2K7xKqX8pyRSesELeT1GHUWYnsw&s",
+      "stock": "In Stock",
+      "description": "Comfortable baseball glove built for performance RIGHTY."
+    },
+    {
+      "id": "9",
+      "name": "Black T-Shirt",
+      "price": 10.99,
+      "image": "https://www.theoneglove.com/cdn/shop/files/One_Glove_OG_Collective_Black_Oversized_Tshirt_Tee-25.jpg?v=1727096450",
+      "stock": "In Stock",
+      "description": "Soft black t-shirt designed for everyday wear."
+    },
+    {
+      "id": "10",
+      "name": "Black Shorts",
+      "price": 15.99,
+      "image": "https://png.pngitem.com/pimgs/s/456-4567450_black-shorts-png-transparent-transparent-background-shorts-outline.png",
+      "stock": "In Stock",
+      "description": "Comfortable athletic black shorts with lightweight material."
+    },
+    {
+      "id": "11",
+      "name": "Spatula",
+      "price": 8.99,
+      "image": "https://m.media-amazon.com/images/I/51DBJWy-jDL._AC_UF894,1000_QL80_.jpg",
+      "stock": "In Stock",
+      "description": "Heat resistant spatula ideal for cooking and baking."
+    },
+    {
+      "id": "12",
+      "name": "Knives",
+      "price": 39.99,
+      "image": "https://t4.ftcdn.net/jpg/05/89/17/51/360_F_589175103_y5UMmqAJ3Zz0ocMRlauDfijvj14flDtJ.jpg",
+      "stock": "Out of Stock",
+      "description": "Sharp stainless steel kitchen knives for meal preparation."
+    },
+    {
+      "id": "13",
+      "name": "Forks",
+      "price": 12.99,
+      "image": "https://t3.ftcdn.net/jpg/05/27/91/82/360_F_527918244_DCM4o5Ppb59RelURQmRlU5EZ0p5eQHVN.jpg",
+      "stock": "In Stock",
+      "description": "High quality stainless steel forks for daily use."
+    },
+    {
+      "id": "14",
+      "name": "Spoons",
+      "price": 11.99,
+      "image": "https://i.pinimg.com/736x/74/c8/c7/74c8c72eabcf01e64a4112bc4f966e9b.jpg",
+      "stock": "In Stock",
+      "description": "Durable stainless steel spoons for kitchen and dining."
+    },
+    {
+      "id": "15",
+      "name": "Gaming Headset",
+      "price": 69.99,
+      "image": "https://i.etsystatic.com/39749559/r/il/1d588a/4596023250/il_570xN.4596023250_5uun.jpg",
+      "stock": "In Stock",
+      "description": "Gaming headset with surround sound and built in microphone."
+    },
+    {
+      "id": "16",
+      "name": "Wireless Mouse",
+      "price": 34.99,
+      "image": "https://www.wlmouse.com/cdn/shop/files/d989fb3d858de6f43d8f71c126e55425.png?v=1764566484",
+      "stock": "In Stock",
+      "description": "Wireless mouse with fast response and ergonomic design."
+    },
+    {
+      "id": "17",
+      "name": "Laptop",
+      "price": 899.99,
+      "image": "https://t4.ftcdn.net/jpg/07/75/74/07/360_F_775740714_smiSlvgsWZI7ffvBl1hPxECVDUSTn45n.jpg",
+      "stock": "Out of Stock",
+      "description": "Powerful laptop designed for work, gaming, and entertainment."
+    },
+    {
+      "id": "19",
+      "name": "Coffee Mug",
+      "price": 9.99,
+      "image": "https://t3.ftcdn.net/jpg/16/60/93/02/360_F_1660930278_yTWvjz6HpWWzltS21mTzTlp8CenNXfOO.jpg",
+      "stock": "Limited Stock",
+      "description": "Classic coffee mug great for hot drinks at home or work."
     }
   ]
 }

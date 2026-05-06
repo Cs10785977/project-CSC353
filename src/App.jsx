@@ -6,9 +6,15 @@ import ProductDetails from './pages/ProductDetails';
 import CartPage from './pages/CartPage';
 import SideCart from './SideCart';
 
+// Main App componenent 
 function App() {
+  //Stores all products from backend
   const [products, setProducts] = useState([]);
+
+  //Stores what the user is entering
   const [searchTerm, setSearchTerm] = useState('');
+
+  //Stores cart items
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
@@ -16,7 +22,8 @@ function App() {
   const [isSideCartOpen, setIsSideCartOpen] = useState(false);
 
   const API_URL = 'http://localhost:5001/products';
-
+  
+  //Fetch products from backend 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
@@ -24,6 +31,7 @@ function App() {
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
+  //Save cart on changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -33,7 +41,7 @@ function App() {
         product.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : [];
-
+  //Adds product to cart or increase quanity
   const addToCart = (product) => {
     const existingItem = cart.find((item) => item.id === product.id);
 
@@ -51,7 +59,8 @@ function App() {
 
     setIsSideCartOpen(true);
   };
-
+  
+  //Increases the quanity of items in the cart
   const increaseQuantity = (id) => {
     setCart(
       cart.map((item) =>
@@ -61,7 +70,8 @@ function App() {
       )
     );
   };
-
+  
+  //decreases the quanity of items in the cart
   const decreaseQuantity = (id) => {
     setCart(
       cart
@@ -73,7 +83,8 @@ function App() {
         .filter((item) => item.quantity > 0)
     );
   };
-
+  
+  //Removes item completely from cart
   const removeFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
@@ -88,7 +99,8 @@ function App() {
         setSearchTerm={setSearchTerm}
         products={products}
       />
-
+      
+      
       <Routes>
         <Route
           path="/"
